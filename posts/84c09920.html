@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>6种常用的排序 | Zeffon&#39;s blog | 算法博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="java">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="常用排序类型Bubble Sort 冒泡排序冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。  冒泡排序算法的运作如下：   比较相邻的元素。如果第一个比第二个大，就交换他们两个。 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。 针对所有的元素重复以上的步骤，除了最后一个。 持续每次对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6种常用的排序">
+<meta property="og:url" content="https://algo.zeffon.cn/posts/84c09920.html">
+<meta property="og:site_name" content="Zeffon&#39;s blog">
+<meta property="og:description" content="常用排序类型Bubble Sort 冒泡排序冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。  冒泡排序算法的运作如下：   比较相邻的元素。如果第一个比第二个大，就交换他们两个。 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。 针对所有的元素重复以上的步骤，除了最后一个。 持续每次对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-20T08:55:39.228Z">
+<meta property="article:author" content="Zeffon">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zeffon&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=1.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"   >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">Zeffon</h5>
+          
+            <div id="mymotto" class="motto"></div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="https://www.zeffon.cn/" target="_blank" >
+                    <i class="icon icon-lg icon-book"></i>
+                    <span>主 博</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+        <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:ZeffonWu@gmail.com" target="_blank"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/Zeffon" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+        </div>
+      
+      </ul>
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">6种常用的排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜索站内的博客">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用排序类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">常用排序类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Bubble-Sort-冒泡排序"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Bubble Sort 冒泡排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Selection-sort-选择排序"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Selection sort 选择排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Insertion-Sort-插入排序"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Insertion Sort 插入排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Merge-sort-归并排序"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Merge sort 归并排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Quicksort-快速排序"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Quicksort 快速排序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#双路排序"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">双路排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三路排序"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">三路排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Heapsort-堆排序"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Heapsort 堆排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-java-common-sort-basic"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">6种常用的排序</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-09-13 00:00:00" datetime="2019-09-12T16:00:00.000Z"  itemprop="datePublished">2019-09-13</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/DataStructure/">DataStructure</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">13</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="常用排序类型"><a href="#常用排序类型" class="headerlink" title="常用排序类型"></a>常用排序类型</h2><h3 id="Bubble-Sort-冒泡排序"><a href="#Bubble-Sort-冒泡排序" class="headerlink" title="Bubble Sort 冒泡排序"></a>Bubble Sort 冒泡排序</h3><p>冒泡排序是一种简单的排序算法。它<code>重复地</code>走访过要排序的数列，一次比较<code>两个</code>元素，如果他们的顺序错误就把他们<code>交换</code>过来。</p>
+<ul>
+<li>冒泡排序算法的运作如下：</li>
+</ul>
+<ol>
+<li>比较<code>相邻</code>的元素。如果第一个比第二个大，就<code>交换</code>他们两个。</li>
+<li>对每一对相邻元素作同样的工作，从开始<code>第一对</code>到结尾的<code>最后</code>一对。这步做完后，最后的元素会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了<code>最后</code>一个。</li>
+<li>持续每次对越来越少的元素<code>重复</code>上面的步骤，直到没有任何一对数字需要比较。</li>
+</ol>
+<ul>
+<li><p>时间复杂度<br><code>最坏</code>时间复杂度  O(n^2)<br><code>最优</code>时间复杂度  O(n)<br><code>平均</code>时间复杂度  O(n^2)  </p>
+</li>
+<li><p>简单的冒泡排序</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> [] a, <span class="keyword">int</span> n)</span></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;n-i; j++){</span><br><span class="line">            <span class="keyword">if</span>(arr[j-<span class="number">1</span>] &gt; arr[j]){</span><br><span class="line">                swap(arr, j-<span class="number">1</span>, j);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="comment">// 交换 i, j 位置</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p>优化–面对已经<code>排好顺序</code>数组时的优化方案</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> [] a, <span class="keyword">int</span> n)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> j, k = n;</span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">true</span>; </span><br><span class="line">    <span class="keyword">while</span> (flag){</span><br><span class="line">        flag=<span class="keyword">false</span>; <span class="comment">// 如果有一趟没有发生位置交换，说明排序已经完成。</span></span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;k; j++){</span><br><span class="line">            <span class="keyword">if</span>(a[j-<span class="number">1</span>] &gt; a[j]){</span><br><span class="line">                swap(arr, j-<span class="number">1</span>, j);</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        k--;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="comment">// 交换 i, j 位置</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+</li>
+</ul>
+<h3 id="Selection-sort-选择排序"><a href="#Selection-sort-选择排序" class="headerlink" title="Selection sort 选择排序"></a>Selection sort 选择排序</h3><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i ++ ){</span><br><span class="line">        <span class="comment">// 寻找[i, n)区间里的最小值的索引</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i + <span class="number">1</span> ; j &lt; n ; j ++ )</span><br><span class="line">            <span class="comment">// 使用compareTo方法比较两个Comparable对象的大小</span></span><br><span class="line">            <span class="keyword">if</span>( arr[j].compareTo( arr[minIndex] ) &lt; <span class="number">0</span> )</span><br><span class="line">                minIndex = j;</span><br><span class="line">        swap( arr , i , minIndex);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+
+<h3 id="Insertion-Sort-插入排序"><a href="#Insertion-Sort-插入排序" class="headerlink" title="Insertion Sort 插入排序"></a>Insertion Sort 插入排序</h3><p>插入排序的工作原理是通过构建<code>有序</code>序列，对于<code>未排序</code>数据，在<code>已排序</code>序列中从后向前扫描，找到相应位置并插入。</p>
+<ul>
+<li>具体算法描述如下：</li>
+</ul>
+<ol>
+<li>从第一个元素开始，该元素可以认为已经被排序</li>
+<li>取出下一个元素，在<code>已经排序</code>的元素序列中从后向前扫描</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到<code>下一位置</code></li>
+<li>重复<code>步骤3</code>，直到找到已排序的元素小于或者等于新元素的位置</li>
+<li>将新元素插入到该位置后</li>
+<li>重复步骤<code>2~5</code></li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">        <span class="comment">// 寻找元素arr[i]合适的插入位置</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写法1</span></span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> j = i ; j &gt; <span class="number">0</span> ; j --)</span><br><span class="line">           <span class="keyword">if</span>(arr[j].compareTo(arr[j-<span class="number">1</span>]) &lt; <span class="number">0</span>)</span><br><span class="line">               swap( arr, j , j-<span class="number">1</span> );</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写法2</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span> &amp;&amp; arr[j].compareTo(arr[j-<span class="number">1</span>]) &lt; <span class="number">0</span> ; j--)</span><br><span class="line">            swap(arr, j, j-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写法3 </span></span><br><span class="line">        Comparable e = arr[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span> &amp;&amp; arr[j-<span class="number">1</span>].compareTo(e) &gt; <span class="number">0</span> ; j--)</span><br><span class="line">            arr[j] = arr[j-<span class="number">1</span>];</span><br><span class="line">        arr[j] = e;</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h3 id="Merge-sort-归并排序"><a href="#Merge-sort-归并排序" class="headerlink" title="Merge sort 归并排序"></a>Merge sort 归并排序</h3><p>采用分治法:<br>分割：递归地把当前序列平均分割成两半。<br>集成：在保持元素顺序的同时将上一步得到的子序列集成到一起（归并）。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将arr[l...mid]和arr[mid+1...r]两部分进行归并</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> mid, <span class="keyword">int</span> r)</span> </span>{</span><br><span class="line"></span><br><span class="line">    Comparable[] aux = Arrays.copyOfRange(arr, l, r+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化，i指向左半部分的起始索引位置l；j指向右半部分起始索引位置mid+1</span></span><br><span class="line">    <span class="keyword">int</span> i = l, j = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> k = l ; k &lt;= r; k ++ ){</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( i &gt; mid ){  <span class="comment">// 如果左半部分元素已经全部处理完毕</span></span><br><span class="line">            arr[k] = aux[j-l]; j ++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( j &gt; r ){   <span class="comment">// 如果右半部分元素已经全部处理完毕</span></span><br><span class="line">            arr[k] = aux[i-l]; i ++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( aux[i-l].compareTo(aux[j-l]) &lt; <span class="number">0</span> ){  <span class="comment">// 左半部分所指元素 &lt; 右半部分所指元素</span></span><br><span class="line">            arr[k] = aux[i-l]; i ++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{  <span class="comment">// 左半部分所指元素 &gt;= 右半部分所指元素</span></span><br><span class="line">            arr[k] = aux[j-l]; j ++;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归使用归并排序,对arr[l...r]的范围进行排序</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>{</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优化2: 对于小规模数组, 使用插入排序</span></span><br><span class="line">    <span class="keyword">if</span>( r - l &lt;= <span class="number">15</span> ){</span><br><span class="line">        InsertionSort.sort(arr, l, r);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// if (l &gt;= r)</span></span><br><span class="line">    <span class="comment">//     return;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = l + (r-l)/<span class="number">2</span>; <span class="comment">// (l+r)/2</span></span><br><span class="line">    sort(arr, l, mid);</span><br><span class="line">    sort(arr, mid + <span class="number">1</span>, r);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优化1: 对于arr[mid] &lt;= arr[mid+1]的情况,不进行merge</span></span><br><span class="line">    <span class="comment">// 对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失</span></span><br><span class="line">    <span class="keyword">if</span>( arr[mid].compareTo(arr[mid+<span class="number">1</span>]) &gt; <span class="number">0</span> )</span><br><span class="line">        merge(arr, l, mid, r);</span><br><span class="line">    <span class="comment">// merge(arr, l, mid, r);</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    sort(arr, <span class="number">0</span>, n-<span class="number">1</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h3 id="Quicksort-快速排序"><a href="#Quicksort-快速排序" class="headerlink" title="Quicksort 快速排序"></a>Quicksort 快速排序</h3><ul>
+<li>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为较小和较大的2个子序列，然后<code>递归</code>地排序两个子序列。<code>步骤</code>为：</li>
+</ul>
+<ol>
+<li>挑选基准值：从数列中挑出一个元素，称为<code>基准</code>（pivot），</li>
+<li>分割：<code>重新</code>排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（与基准值相等的数可以到任何一边）。在这个分割结束之后，对基准值的排序就已经完成，</li>
+<li>递归排序子序列：<code>递归</code>地将小于基准值元素的子序列和大于基准值元素的子序列排序。 </li>
+</ol>
+<ul>
+<li>递归到最底部的<code>判断条件</code>是数列的大小是零或一，此时该数列显然已经<code>有序</code>。</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对arr[l...r]部分进行partition操作</span></span><br><span class="line"><span class="comment">// 返回p, 使得arr[l...p-1] &lt; arr[p] ; arr[p+1...r] &gt; arr[p]</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>{</span><br><span class="line"></span><br><span class="line">    Comparable v = arr[l];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> j = l; <span class="comment">// arr[l+1...j] &lt; v ; arr[j+1...i) &gt; v</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = l + <span class="number">1</span> ; i &lt;= r ; i ++ )</span><br><span class="line">        <span class="keyword">if</span>( arr[i].compareTo(v) &lt; <span class="number">0</span> ){</span><br><span class="line">            j ++;</span><br><span class="line">            swap(arr, j, i);</span><br><span class="line">        }</span><br><span class="line">    swap(arr, l, j);</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归使用快速排序,对arr[l...r]的范围进行排序</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>{</span><br><span class="line">    <span class="keyword">if</span>( l &gt;= r )</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> p = partition(arr, l, r);</span><br><span class="line">    sort(arr, l, p-<span class="number">1</span> );</span><br><span class="line">    sort(arr, p+<span class="number">1</span>, r);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    sort(arr, <span class="number">0</span>, n-<span class="number">1</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h4 id="双路排序"><a href="#双路排序" class="headerlink" title="双路排序"></a>双路排序</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort2Ways</span> </span>{</span><br><span class="line">    <span class="comment">// 双路快速排序的partition</span></span><br><span class="line">    <span class="comment">// 返回p, 使得arr[l...p-1] &lt; arr[p] ; arr[p+1...r] &gt; arr[p]</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot</span></span><br><span class="line">        swap( arr, l , (<span class="keyword">int</span>)(Math.random()*(r-l+<span class="number">1</span>))+l );</span><br><span class="line">        Comparable v = arr[l];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// arr[l+1...i) &lt;= v; arr(j...r] &gt;= v</span></span><br><span class="line">        <span class="keyword">int</span> i = l+<span class="number">1</span>, j = r;</span><br><span class="line">        <span class="keyword">while</span>( <span class="keyword">true</span> ){</span><br><span class="line">            <span class="comment">// 注意这里的边界, arr[i].compareTo(v) &lt; 0, 不能是arr[i].compareTo(v) &lt;= 0</span></span><br><span class="line">            <span class="keyword">while</span>( i &lt;= r &amp;&amp; arr[i].compareTo(v) &lt; <span class="number">0</span> )</span><br><span class="line">                i ++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 注意这里的边界, arr[j].compareTo(v) &gt; 0, 不能是arr[j].compareTo(v) &gt;= 0</span></span><br><span class="line">            <span class="keyword">while</span>( j &gt;= l+<span class="number">1</span> &amp;&amp; arr[j].compareTo(v) &gt; <span class="number">0</span> )</span><br><span class="line">                j --;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( i &gt; j )</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            swap( arr, i, j );</span><br><span class="line">            i ++;</span><br><span class="line">            j --;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        swap(arr, l, j);</span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归使用快速排序,对arr[l...r]的范围进行排序</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对于小规模数组, 使用插入排序</span></span><br><span class="line">        <span class="keyword">if</span>( r - l &lt;= <span class="number">15</span> ){</span><br><span class="line">            InsertionSort.sort(arr, l, r);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">int</span> p = partition(arr, l, r);</span><br><span class="line">        sort(arr, l, p-<span class="number">1</span> );</span><br><span class="line">        sort(arr, p+<span class="number">1</span>, r);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> n = arr.length;</span><br><span class="line">        sort(arr, <span class="number">0</span>, n-<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">        Object t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h4 id="三路排序"><a href="#三路排序" class="headerlink" title="三路排序"></a>三路排序</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort3Ways</span> </span>{</span><br><span class="line">    <span class="comment">// 递归使用快速排序,对arr[l...r]的范围进行排序</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对于小规模数组, 使用插入排序</span></span><br><span class="line">        <span class="keyword">if</span>( r - l &lt;= <span class="number">15</span> ){</span><br><span class="line">            InsertionSort.sort(arr, l, r);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot</span></span><br><span class="line">        swap( arr, l, (<span class="keyword">int</span>)(Math.random()*(r-l+<span class="number">1</span>)) + l );</span><br><span class="line">        Comparable v = arr[l];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> lt = l;     <span class="comment">// arr[l+1...lt] &lt; v</span></span><br><span class="line">        <span class="keyword">int</span> gt = r + <span class="number">1</span>; <span class="comment">// arr[gt...r] &gt; v</span></span><br><span class="line">        <span class="keyword">int</span> i = l+<span class="number">1</span>;    <span class="comment">// arr[lt+1...i) == v</span></span><br><span class="line">        <span class="keyword">while</span>( i &lt; gt ){</span><br><span class="line">            <span class="keyword">if</span>( arr[i].compareTo(v) &lt; <span class="number">0</span> ){</span><br><span class="line">                swap( arr, i, lt+<span class="number">1</span>);</span><br><span class="line">                i ++;</span><br><span class="line">                lt ++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( arr[i].compareTo(v) &gt; <span class="number">0</span> ){</span><br><span class="line">                swap( arr, i, gt-<span class="number">1</span>);</span><br><span class="line">                gt --;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span>{ <span class="comment">// arr[i] == v</span></span><br><span class="line">                i ++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        swap( arr, l, lt );</span><br><span class="line"></span><br><span class="line">        sort(arr, l, lt-<span class="number">1</span>);</span><br><span class="line">        sort(arr, gt, r);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> n = arr.length;</span><br><span class="line">        sort(arr, <span class="number">0</span>, n-<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{</span><br><span class="line">        Object t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h3 id="Heapsort-堆排序"><a href="#Heapsort-堆排序" class="headerlink" title="Heapsort 堆排序"></a>Heapsort 堆排序</h3><ul>
+<li>重复从最大堆积取出数值<code>最大</code>的结点(把根结点和最后一个结点交换，把交换后的最后一个结点移出堆)，并让残余的堆积维持<code>最大堆积</code>性质。</li>
+<li>通常堆是通过一维<code>数组</code>来实现的。在数组起始位置<code>为1</code>的情形中：</li>
+</ul>
+<ol>
+<li>父节点i的<code>左子节点</code>在位置 (2i);</li>
+<li>父节点i的<code>右子节点</code>在位置 (2i+1);</li>
+<li>子节点i的<code>父节点</code>在位置 （i/2);</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] arr)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意，此时我们的堆是从0开始索引的</span></span><br><span class="line">    <span class="comment">// 从(最后一个元素的索引-1)/2开始</span></span><br><span class="line">    <span class="comment">// 最后一个元素的索引 = n-1</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = (n-<span class="number">1</span>-<span class="number">1</span>)/<span class="number">2</span> ; i &gt;= <span class="number">0</span> ; i -- )</span><br><span class="line">        shiftDown2(arr, n, i);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt; <span class="number">0</span> ; i-- ){</span><br><span class="line">        swap( arr, <span class="number">0</span>, i);</span><br><span class="line">        shiftDown2(arr, i, <span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换堆中索引为i和j的两个元素</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>{</span><br><span class="line">    Object t = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = t;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原始的shiftDown过程</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shiftDown</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( <span class="number">2</span>*k+<span class="number">1</span> &lt; n ){</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">2</span>*k+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>( j+<span class="number">1</span> &lt; n &amp;&amp; arr[j+<span class="number">1</span>].compareTo(arr[j]) &gt; <span class="number">0</span> )</span><br><span class="line">            j += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( arr[k].compareTo(arr[j]) &gt;= <span class="number">0</span> )<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        swap( arr, k, j);</span><br><span class="line">        k = j;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优化的shiftDown过程, 使用赋值的方式取代不断的swap</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shiftDown2</span><span class="params">(Comparable[] arr, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>{</span><br><span class="line"></span><br><span class="line">    Comparable e = arr[k];</span><br><span class="line">    <span class="keyword">while</span>( <span class="number">2</span>*k+<span class="number">1</span> &lt; n ){</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">2</span>*k+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>( j+<span class="number">1</span> &lt; n &amp;&amp; arr[j+<span class="number">1</span>].compareTo(arr[j]) &gt; <span class="number">0</span> )</span><br><span class="line">            j += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( e.compareTo(arr[j]) &gt;= <span class="number">0</span> )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        arr[k] = arr[j];</span><br><span class="line">        k = j;</span><br><span class="line">    }</span><br><span class="line">    arr[k] = e;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><code>原地排序</code>就是指在排序过程中不申请多余的存储空间，只利用<code>原来存储</code>待排数据的存储空间进行比较和交换的数据排序。</li>
+</ul>
+<p>| 类型 | 平均时间复杂度 | 原地排序 | 稳定性 |<br>| :—-: | :—-: | :—-: | :—-: | :—-: |<br>| 冒泡排序 | O(n^2) | √| 稳定 |<br>| 选择排序 | O(1) | √ | 不稳定 |<br>| 插入排序 | O(n^2) | √ | 稳定 |<br>| 归并排序 | O(nlog n) | X | 稳定 |<br>| 快速排序 | O(nlog n) | √ | 不稳定 |<br>| 堆排序 | O(nlog n) | √ | 不稳定 |</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">冒泡排序</a></li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">选择排序</a></li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">插入排序</a></li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a></li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a></li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">堆排序</a></li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2020-06-20T08:55:39.228Z" itemprop="dateUpdated">2020-06-20 16:55:39</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/84c09920.html" target="_blank" rel="external">https://algo.zeffon.cn/posts/84c09920.html</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://algo.zeffon.cn'">
+            <img src="/img/avatar.png" alt="Zeffon">
+            <a>Zeffon</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>请我喝一杯咖啡吧</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://algo.zeffon.cn/posts/84c09920.html&title=《6种常用的排序》 — Zeffon's blog&pic=https://algo.zeffon.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://algo.zeffon.cn/posts/84c09920.html&title=《6种常用的排序》 — Zeffon's blog&source=记录平时的学习经验与心得" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://algo.zeffon.cn/posts/84c09920.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6种常用的排序》 — Zeffon's blog&url=https://algo.zeffon.cn/posts/84c09920.html&via=https://algo.zeffon.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://algo.zeffon.cn/posts/84c09920.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/6541e420.html" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：283.移动零
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/ce7fdf0a.html" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：AVL树、红黑树和哈希表">下一篇：AVL树、红黑树和哈希表</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3ab4083ebeb4b2d33759',
+            clientSecret: 'dd3ce21927ab8ed51f84cc6c49e5bfada7bbaae2',
+            repo: 'algo',
+            owner: 'Zeffon',
+            admin: ['Zeffon']
+        });
+        gitalk.render('gitalk-container');
+    </script>
+</section>
+
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+            <i class="icon icon-lg icon-copyright"></i>
+            2019 - 2020
+            <a href="https://algo.zeffon.cn">zeffon.cn</a>
+            粤XXX
+        </span>
+        <br/>
+
+        <span class="license"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+ - - <span id="RunTime" style="color:#a7a7a7;"></span>
+        </span>
+
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/coffee.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://algo.zeffon.cn/posts/84c09920.html&title=《6种常用的排序》 — Zeffon's blog&pic=https://algo.zeffon.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://algo.zeffon.cn/posts/84c09920.html&title=《6种常用的排序》 — Zeffon's blog&source=记录平时的学习经验与心得" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://algo.zeffon.cn/posts/84c09920.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6种常用的排序》 — Zeffon's blog&url=https://algo.zeffon.cn/posts/84c09920.html&via=https://algo.zeffon.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://algo.zeffon.cn/posts/84c09920.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzklEQVR42u3aS4rDMBAFwNz/0hmY1UBw3K9b0iRQXpnYyKUsRP8ej/L1/L1e7//+8vrO65uVpwsuXFzcMff59nrPff/+ZJ3LLeHi4h7kVg6vyoF1dczV729suLi4H8Z9f/z1No+Li/vt3KuwI/gYLi7uV3EryU8avtQ3uSVXw8XFHXAnBdNV94fqu7i4uOOuxLwYmqZPN1/HxcU9wq2UOCeljTT5KR1zuLi4R7jp0mkc0guhblbAxcXdxk0DlFVjFr22DS4u7nlur+iZhj71Imyc9uDi4i7ipoMU9VboqsbJ5X+Mi4u7jVtJeNKGa69Zsiw/w8XFXcStLDofyZqPeeHi4p7k9qBpg6R3qN2URXBxcbdx68FK5cNpoBOUUHFxcQ9y66lIOozV641e0nFxcY9w60FMvbjZ23zwF+Di4m7m1qGVjfWGMHBxcT+Tm0LTYay05hk3WXFxcTdw61cvBUpDnEcaZ+Hi4i7lpgdKPVhJk6X0KS4u7m7uPHypoHtDGDdVHFxc3M3cNPnpDWrUxzjix7i4uP/ErbdJekdkafO4uLgfz520W9KCCy4u7nnufKFKSTTd2KgsgouLO+CmBdP0CKsPcqVhEC4u7gbuD1BhvlVDeoNeAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=1.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=1.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=1.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/12/14");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+    elasticText({
+        id: "mymotto",
+        duration: 100,
+        effact: "easeOut",
+        content: "处世明故，循名责实。"
+    });
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "Zeffon");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+</body>
+</html>
